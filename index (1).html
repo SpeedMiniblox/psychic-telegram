@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tuff Client 1.12.2 • Command Hub</title>
+<style>
+:root{--bg:#080b12;--panel:#101722;--panel2:#0c111a;--text:#eaf2ff;--muted:#92a4bd;--accent:#55d6ff;--accent2:#8d5cff;--border:#233044;--danger:#ff5f6d;}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#18233a 0,#080b12 50%);color:var(--text);font-family:Inter,system-ui,Segoe UI,Arial,sans-serif}
+.wrap{max-width:1200px;margin:auto;padding:22px}
+.hero{background:linear-gradient(135deg,rgba(85,214,255,.14),rgba(141,92,255,.12));border:1px solid var(--border);border-radius:22px;padding:28px;box-shadow:0 16px 50px #0006}
+h1{margin:0 0 8px;font-size:clamp(30px,6vw,58px);letter-spacing:-1px}h1 span{color:var(--accent)}.sub{color:var(--muted);font-size:16px;line-height:1.6}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.search{flex:1;min-width:220px;background:var(--panel);border:1px solid var(--border);color:var(--text);padding:13px 15px;border-radius:12px;outline:none}.btn{border:1px solid var(--border);background:#141d2a;color:var(--text);padding:11px 14px;border-radius:12px;cursor:pointer;font-weight:700}.btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{padding:9px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer}.tab.active,.tab:hover{background:#122131;color:var(--text);border-color:#2e536b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);border-radius:18px;overflow:hidden}.cardhead{padding:16px 17px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:10px;align-items:center}.title{font-size:18px;font-weight:800}.tag{font-size:11px;color:var(--accent);border:1px solid #24516a;padding:4px 7px;border-radius:999px}.desc{padding:0 17px;color:var(--muted);font-size:13px;line-height:1.45}.cmd{margin:14px;background:#06090e;border:1px solid #1d2a3b;border-radius:12px;padding:12px;position:relative}.cmd code{display:block;white-space:pre-wrap;word-break:break-word;color:#d8e7ff;font:12px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;padding-right:72px}.copy{position:absolute;right:9px;top:9px;font-size:12px;padding:7px 9px}.note{margin-top:20px;padding:14px 16px;border-left:4px solid var(--accent);background:#0e1722;border-radius:10px;color:#c6d2e4;line-height:1.5}.hidden{display:none!important}.footer{padding:35px 0 10px;text-align:center;color:#6f8198;font-size:12px}
+@media(max-width:600px){.wrap{padding:12px}.hero{padding:20px}.grid{grid-template-columns:1fr}.cmd code{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section class="hero">
+  <h1>⚡ <span>TUFF CLIENT</span> COMMAND HUB</h1>
+  <div class="sub">Java/Eaglercraft-style <b>1.12.2</b> command collection. Built around the OP items and HackyH-style commands we were making — with old 1.12.2 NBT syntax instead of modern 1.20+ components.</div>
+  <div class="toolbar"><input id="search" class="search" placeholder="Search commands…"><button class="btn" onclick="copyAllVisible()">Copy visible commands</button></div>
+</section>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" data-cat="all">All</button><button class="tab" data-cat="villager">Villagers</button><button class="tab" data-cat="gear">OP Gear</button><button class="tab" data-cat="combat">Combat</button><button class="tab" data-cat="utility">Utility</button><button class="tab" data-cat="fun">Fun</button>
+</div>
+
+<div class="grid" id="grid">
+
+<article class="card" data-cat="villager" data-text="hackyh op trader villager trades diamond armor tools bow elytra totem golden apple">
+ <div class="cardhead"><div class="title">👑 (- HackyH -) OP Trader</div><div class="tag">VILLAGER</div></div>
+ <p class="desc">1 dirt trades for enchanted diamond armor, weapons, tools, bow, elytra, totems and enchanted golden apples.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/summon villager ~ ~ ~ {Profession:3,Career:1,CareerLevel:5,PersistenceRequired:1b,Invulnerable:1b,NoAI:1b,Silent:1b,CustomName:&quot;(- HackyH -)&quot;,Offers:{Recipes:[{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_chestplate&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Chestplate\&quot;,\&quot;color\&quot;:\&quot;aqua\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:255s},{id:7s,lvl:255s},{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_helmet&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Helmet\&quot;,\&quot;color\&quot;:\&quot;aqua\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:5s},{id:5s,lvl:255s},{id:6s,lvl:255s},{id:7s,lvl:255s},{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_leggings&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Leggings\&quot;,\&quot;color\&quot;:\&quot;dark_aqua\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:255s},{id:7s,lvl:255s},{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_boots&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Boots\&quot;,\&quot;color\&quot;:\&quot;green\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:2s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:255s},{id:7s,lvl:255s},{id:8s,lvl:255s},{id:9s,lvl:255s},{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_sword&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Sword\&quot;,\&quot;color\&quot;:\&quot;red\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:16s,lvl:255s},{id:17s,lvl:255s},{id:18s,lvl:255s},{id:19s,lvl:255s},{id:20s,lvl:255s},{id:21s,lvl:255s},{id:22s,lvl:255s},{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_pickaxe&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Pickaxe\&quot;,\&quot;color\&quot;:\&quot;green\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:32s,lvl:255s},{id:33s,lvl:255s},{id:34s,lvl:255s},{id:35s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_axe&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Axe\&quot;,\&quot;color\&quot;:\&quot;dark_green\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:16s,lvl:255s},{id:17s,lvl:255s},{id:18s,lvl:255s},{id:32s,lvl:255s},{id:34s,lvl:255s},{id:35s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_shovel&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Shovel\&quot;,\&quot;color\&quot;:\&quot;dark_aqua\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:32s,lvl:255s},{id:33s,lvl:255s},{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;diamond_hoe&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Hoe\&quot;,\&quot;color\&quot;:\&quot;green\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:32s,lvl:255s},{id:34s,lvl:255s},{id:35s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;bow&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Bow\&quot;,\&quot;color\&quot;:\&quot;dark_red\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:48s,lvl:255s},{id:49s,lvl:255s},{id:50s,lvl:255s},{id:51s,lvl:1s},{id:34s,lvl:255s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;elytra&quot;,Count:1b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Elytra\&quot;,\&quot;color\&quot;:\&quot;light_purple\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;},ench:[{id:34s,lvl:255s},{id:70s,lvl:1s}]}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;totem_of_undying&quot;,Count:64b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Totems\&quot;,\&quot;color\&quot;:\&quot;red\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;}}},maxUses:9999999,rewardExp:0b},{buy:{id:&quot;dirt&quot;,Count:1b},sell:{id:&quot;enchanted_golden_apple&quot;,Count:64b,tag:{display:{Name:&quot;{\&quot;text\&quot;:\&quot;Hacked Apples\&quot;,\&quot;color\&quot;:\&quot;gold\&quot;,\&quot;bold\&quot;:true,\&quot;italic\&quot;:false}&quot;}}},maxUses:9999999,rewardExp:0b}]}}</code></div>
+</article>
+
+<article class="card" data-cat="gear" data-text="op sword diamond sword sharpness fire aspect knockback looting unbreaking mending">
+ <div class="cardhead"><div class="title">⚔️ Hacked Sword</div><div class="tag">GEAR</div></div>
+ <p class="desc">Diamond sword with the classic 1.12.2 enchantment IDs pushed to level 255.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/give @s diamond_sword 1 0 {display:{Name:"{\"text\":\"Hacked Sword\",\"color\":\"red\",\"bold\":true,\"italic\":false}"},ench:[{id:16s,lvl:255s},{id:17s,lvl:255s},{id:18s,lvl:255s},{id:19s,lvl:255s},{id:20s,lvl:255s},{id:21s,lvl:255s},{id:34s,lvl:255s}]}</code></div>
+</article>
+
+<article class="card" data-cat="gear" data-text="op armor diamond chestplate helmet leggings boots protection thorns feather falling">
+ <div class="cardhead"><div class="title">🛡️ Full Hacked Diamond Armor</div><div class="tag">GEAR</div></div>
+ <p class="desc">Four separate commands, each using old 1.12.2 NBT.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/give @s diamond_chestplate 1 0 {display:{Name:"{\"text\":\"Hacked Chestplate\",\"color\":\"aqua\",\"bold\":true,\"italic\":false}"},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:255s},{id:7s,lvl:255s},{id:34s,lvl:255s}]}
+
+/give @s diamond_helmet 1 0 {display:{Name:"{\"text\":\"Hacked Helmet\",\"color\":\"aqua\",\"bold\":true,\"italic\":false}"},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:3s,lvl:255s},{id:5s,lvl:255s},{id:6s,lvl:255s},{id:7s,lvl:255s},{id:34s,lvl:255s}]}
+
+/give @s diamond_leggings 1 0 {display:{Name:"{\"text\":\"Hacked Leggings\",\"color\":\"dark_aqua\",\"bold\":true,\"italic\":false}"},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:255s},{id:7s,lvl:255s},{id:34s,lvl:255s}]}
+
+/give @s diamond_boots 1 0 {display:{Name:"{\"text\":\"Hacked Boots\",\"color\":\"green\",\"bold\":true,\"italic\":false}"},ench:[{id:0s,lvl:255s},{id:1s,lvl:255s},{id:2s,lvl:255s},{id:3s,lvl:255s},{id:4s,lvl:255s},{id:7s,lvl:255s},{id:8s,lvl:255s},{id:9s,lvl:255s},{id:34s,lvl:255s}]}</code></div>
+</article>
+
+<article class="card" data-cat="combat" data-text="op bow power punch flame infinity unbreaking mending">
+ <div class="cardhead"><div class="title">🏹 Hacked Bow</div><div class="tag">COMBAT</div></div>
+ <p class="desc">Power 255, Punch 255, Flame and Infinity.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/give @s bow 1 0 {display:{Name:"{\"text\":\"Hacked Bow\",\"color\":\"dark_red\",\"bold\":true,\"italic\":false}"},ench:[{id:48s,lvl:255s},{id:49s,lvl:255s},{id:50s,lvl:255s},{id:51s,lvl:1s},{id:34s,lvl:255s}]}</code></div>
+</article>
+
+<article class="card" data-cat="combat" data-text="tnt cannon tnt command explosive arrow">
+ <div class="cardhead"><div class="title">💥 TNT Summoner</div><div class="tag">COMBAT</div></div>
+ <p class="desc">Instantly spawns primed TNT at your position. Change Fuse to make it slower.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/summon tnt ~ ~ ~ {Fuse:20}</code></div>
+</article>
+
+<article class="card" data-cat="utility" data-text="teleport coordinate tp command">
+ <div class="cardhead"><div class="title">📍 Teleport</div><div class="tag">UTILITY</div></div>
+ <p class="desc">Replace the coordinates with where you want to go.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/tp @s 0 100 0</code></div>
+</article>
+
+<article class="card" data-cat="utility" data-text="gamemode creative survival spectator adventure">
+ <div class="cardhead"><div class="title">🎮 Gamemode Switch</div><div class="tag">UTILITY</div></div>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/gamemode 1 @s
+/gamemode 0 @s
+/gamemode 2 @s
+/gamemode 3 @s</code></div>
+</article>
+
+<article class="card" data-cat="utility" data-text="effect strength speed resistance regeneration fire resistance night vision">
+ <div class="cardhead"><div class="title">⚡ Maxed Effects</div><div class="tag">UTILITY</div></div>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/effect @s strength 999999 255 true
+/effect @s speed 999999 255 true
+/effect @s resistance 999999 255 true
+/effect @s regeneration 999999 255 true
+/effect @s fire_resistance 999999 0 true
+/effect @s night_vision 999999 0 true</code></div>
+</article>
+
+<article class="card" data-cat="fun" data-text="lightning arrow horse zombie lightning">
+ <div class="cardhead"><div class="title">⚡ Lightning Strike</div><div class="tag">FUN</div></div>
+ <p class="desc">Summon lightning wherever you're standing.</p>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/summon lightning_bolt ~ ~ ~</code></div>
+</article>
+
+<article class="card" data-cat="fun" data-text="tamed horse diamond armor fastest horse">
+ <div class="cardhead"><div class="title">🐎 OP Horse</div><div class="tag">FUN</div></div>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/summon horse ~ ~ ~ {Tame:1b,PersistenceRequired:1b,Health:40f,Attributes:[{Name:"generic.maxHealth",Base:40.0},{Name:"generic.movementSpeed",Base:1.0},{Name:"horse.jumpStrength",Base:2.0}],ArmorItem:{id:"diamond_horse_armor",Count:1b}}</code></div>
+</article>
+
+<article class="card" data-cat="fun" data-text="totem undying enchanted golden apple op items">
+ <div class="cardhead"><div class="title">💚 OP Survival Items</div><div class="tag">FUN</div></div>
+ <div class="cmd"><button class="btn copy" onclick="copyCmd(this)">Copy</button><code>/give @s totem_of_undying 64
+/give @s golden_apple 64 1</code></div>
+</article>
+
+</div>
+
+<div class="note"><b>1.12.2 note:</b> This hub intentionally uses the old NBT style. Items such as netherite armor, mace, spear, trident, crossbow, modern item components, Lunge, Breach, Density and Wind Burst do not exist in 1.12.2, so they are not used here.</div>
+<div class="footer">Tuff Client 1.12.2 Command Hub • Single-file index.html</div>
+</div>
+<script>
+const search=document.getElementById('search'); const cards=[...document.querySelectorAll('.card')]; const tabs=[...document.querySelectorAll('.tab')]; let cat='all';
+function filter(){const q=search.value.toLowerCase();cards.forEach(c=>{const ok=(cat==='all'||c.dataset.cat===cat)&&c.dataset.text.includes(q);c.classList.toggle('hidden',!ok)})}
+search.addEventListener('input',filter);tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');cat=t.dataset.cat;filter()}));
+function getCode(btn){return btn.parentElement.querySelector('code').innerText.trim()}
+function copyCmd(btn){navigator.clipboard.writeText(getCode(btn)).then(()=>{const old=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=old,900)})}
+function copyAllVisible(){const txt=cards.filter(c=>!c.classList.contains('hidden')).map(c=>c.querySelector('code').innerText.trim()).join('\n\n');navigator.clipboard.writeText(txt).then(()=>alert('Copied visible commands!'))}
+</script>
+</body>
+</html>
